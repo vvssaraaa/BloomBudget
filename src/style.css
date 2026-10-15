@@ -224,3 +224,56 @@ footer { padding: 27px 0 18px; color: var(--muted); font-size: 7px; text-align: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Functional UI additions */
+
+.form-error {
+  margin: 0 0 12px; padding: 9px; background: #fff0f5; border: 2px solid #cc718f; color: #a34468; font-size: 12px;
+}
+
+.delete-button { 
+  flex-shrink: 0; width: 27px; height: 27px; padding: 0; background: #fff0f5; border: 1px solid #e7afcb; color: #a34468; font-size: 19px; line-height: 1;
+}
+
+.delete-button:hover {
+  background: #f4b8d2;
+}
+
+.donut {
+  position: relative;
+  overflow: hidden;
+}
+
+.donut canvas {
+  position: absolute; inset: 0; width: 100% !important; height: 100% !important;
+}
+
+.donut-center {
+  position: relative; z-index: 1; pointer-events: none;
+}
+
+.goal-form {
+  margin-top: 18px; padding: 14px; background: #f8f2ff; border: 2px dashed var(--line);
+}
+
+.goal-form label {
+  display: grid; gap: 5px; margin-bottom: 12px; font-size: 12px; font-weight: 700;
+}
+
+.goal-form input {
+  width: 100%; min-width: 0;
+}
+
+@media (max-width: 370px) {
+  .transaction {
+    flex-wrap: wrap;
+  }
+
+  .transaction-details {
+    min-width: 100px;
+  }
+
+  .amount {
+    margin-left: auto;
+  }
+}
