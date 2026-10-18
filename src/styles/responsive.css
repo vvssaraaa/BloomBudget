@@ -1,0 +1,248 @@
+
+/* Large screens */
+@media (min-width: 1500px) {
+  .main {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+
+  .panel {
+    padding: 26px;
+  }
+}
+
+/* Tablets and smaller laptops */
+@media (max-width: 1100px) {
+  .sidebar {
+    width: 190px;
+    padding: 20px 12px;
+  }
+
+  .main {
+    margin-left: 190px;
+    padding: 0 22px;
+  }
+
+  .summary-grid {
+    gap: 10px;
+  }
+
+  .summary {
+    padding: 13px;
+  }
+
+  .summary-top small {
+    font-size: 6px;
+  }
+
+  .dashboard-grid {
+    gap: 14px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .donut {
+    flex-basis: 120px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .donut-center {
+    width: 74px;
+    height: 74px;
+  }
+
+  .savings-content {
+    gap: 10px;
+  }
+}
+
+/* Mobile navigation and layout */
+@media (max-width: 820px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding: 14px 18px;
+    border-right: 0;
+    border-bottom: 3px solid var(--purple);
+  }
+
+  .brand {
+    margin-bottom: 13px;
+  }
+
+  .brand-light {
+    display: inline;
+    margin-left: 4px;
+  }
+
+  .side-label,
+  .side-quest,
+  .side-footer {
+    display: none;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    flex-shrink: 0;
+    gap: 7px;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 0 22px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .main {
+    padding: 0 14px;
+  }
+
+  .topbar {
+    min-height: 61px;
+    font-size: 8px;
+  }
+
+  .month-tag {
+    padding: 6px;
+    font-size: 8px;
+  }
+
+  .welcome {
+    min-height: 170px;
+  }
+
+  .welcome h1 {
+    max-width: 340px;
+    font-size: 27px;
+  }
+
+  .welcome p {
+    max-width: 260px;
+    font-size: 12px;
+  }
+
+  .garden-art {
+    position: absolute;
+    right: -48px;
+    bottom: 18px;
+    opacity: .4;
+  }
+
+  .level-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 7px;
+  }
+
+  .level-bar .xp-track {
+    flex-basis: 35%;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .summary {
+    padding: 15px;
+  }
+
+  .summary-amount {
+    margin-top: 9px;
+    font-size: 25px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .spending-layout {
+    gap: 12px;
+  }
+
+  .donut {
+    flex-basis: 140px;
+    width: 140px;
+    height: 140px;
+  }
+
+  .donut-center {
+    width: 82px;
+    height: 82px;
+  }
+
+  .savings-content {
+    grid-template-columns: minmax(100px, .8fr) minmax(0, 1.2fr);
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 370px) {
+  .main {
+    padding: 0 10px;
+  }
+
+  .topbar {
+    gap: 5px;
+  }
+
+  .month-tag {
+    max-width: 135px;
+  }
+
+  .form-row,
+  .savings-content {
+    grid-template-columns: 1fr;
+  }
+
+  .spending-layout {
+    flex-direction: column;
+  }
+
+  .legend {
+    width: 100%;
+  }
+
+  .companion-card {
+    min-height: 150px;
+  }
+
+  .transaction {
+    flex-wrap: wrap;
+  }
+
+  .transaction-details {
+    min-width: 100px;
+  }
+
+  .amount {
+    margin-left: auto;
+  }
+}
+
+/* Accessibility: reduce animations when requested */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

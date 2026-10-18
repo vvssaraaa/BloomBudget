@@ -1,0 +1,97 @@
+
+:root {
+  --bg: #f8f2ff;
+  --paper: #fffdf7;
+  --purple: #49345f;
+  --muted: #9686a5;
+  --line: #d9c8eb;
+  --lilac: #c9b2f0;
+  --pink: #f4b8d2;
+  --mint: #b8e3c8;
+  --yellow: #f6d989;
+  --pixel: "Press Start 2P", monospace;
+  --body: "DM Sans", sans-serif;
+  --shadow: 4px 4px 0 #e4d6f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--purple);
+  font: 14px/1.6 var(--body);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #9874d0;
+  outline-offset: 3px;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--purple);
+}
+
+.pixel-label,
+.side-label,
+.side-footer,
+.panel-star,
+.summary-top small,
+.level-bar,
+.companion-card small,
+.goal-percent,
+footer {
+  font-family: var(--pixel);
+  font-size: 8px;
+  line-height: 1.9;
+}
+
+.pixel-label {
+  display: block;
+  margin: 0 0 7px;
+  color: #9674bd;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer {
+  padding: 27px 0 18px;
+  color: var(--muted);
+  font-size: 7px;
+  text-align: center;
+}
