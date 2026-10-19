@@ -3,7 +3,7 @@
   --bg: #f8f2ff;
   --paper: #fffdf7;
   --purple: #49345f;
-  --muted: #9686a5;
+  --muted: #71617f;
   --line: #d9c8eb;
   --lilac: #c9b2f0;
   --pink: #f4b8d2;
@@ -81,7 +81,7 @@ footer {
 .pixel-label {
   display: block;
   margin: 0 0 7px;
-  color: #9674bd;
+  color: #74528e;
 }
 
 .muted {
@@ -94,4 +94,73 @@ footer {
   color: var(--muted);
   font-size: 7px;
   text-align: center;
+}
+
+/* Accessibility: clear keyboard focus */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #6546a8;
+  outline-offset: 3px;
+}
+
+/* Accessibility: don't let disabled controls look active */
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Accessibility: comfortable minimum control sizes */
+button,
+input,
+select {
+  min-height: 2.75rem;
+}
+
+/* Keep keyboard focus visible when scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Accessibility: make errors easy to identify */
+.form-error {
+  color: #a21d3d;
+  font-weight: 600;
+}
+
+/* Accessibility: don't rely on placeholder text as a label */
+input::placeholder {
+  opacity: 1;
+}
+/* Accessibility: skip navigation */
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  background: #35234f;
+  border-radius: 0.5rem;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Keep the main content visible when navigating to it */
+#main-content {
+  scroll-margin-top: 1rem;
 }

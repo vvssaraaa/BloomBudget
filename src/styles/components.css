@@ -76,7 +76,7 @@
   position: relative;
   z-index: 1;
   margin: 4px 0 0;
-  color: #80718f;
+  color: #665875;
   font-size: 11px;
 }
 
@@ -138,7 +138,7 @@ select {
   min-height: 42px;
   padding: 9px;
   background: white;
-  border: 2px solid #dfd2eb;
+  border: 2px solid #a895bc;
   border-radius: 2px;
   color: var(--purple);
 }
@@ -149,7 +149,7 @@ select:focus {
 }
 
 input::placeholder {
-  color: #b4a6c0;
+  color: #746780;
 }
 
 .form-row {
@@ -317,7 +317,7 @@ input::placeholder {
 
 .game-tip p {
   margin: 0;
-  color: #66856b;
+  color: #49674d;
   font-size: 11px;
 }
 
@@ -332,7 +332,7 @@ input::placeholder {
 
 .pink-tip p,
 .pink-tip strong {
-  color: #a26386;
+  color: #87506c;
 }
 
 /* Transactions */
@@ -384,7 +384,7 @@ input::placeholder {
 }
 
 .earned {
-  color: #43855c;
+  color: #39734f;
 }
 
 .view-all {
@@ -438,7 +438,7 @@ input::placeholder {
 
 .companion-card small {
   margin-top: 14px;
-  color: #a66a8b;
+  color: #87506c;
   font-size: 7px;
 }
 
@@ -559,7 +559,7 @@ input::placeholder {
 .goal-percent {
   display: block;
   margin-bottom: 13px;
-  color: #4f9668;
+  color: #39734f;
   font-size: 7px;
 }
 

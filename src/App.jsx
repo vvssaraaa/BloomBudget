@@ -55,15 +55,23 @@ export default function App() {
 
   return (
     <div className="app">
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+
       <Sidebar />
 
-      <main className="main" id="home">
+      <main className="main" id="main-content">
         <header className="topbar">
-          <span>MY WORLD <b>/</b> DASHBOARD</span>
+          <span>
+            MY WORLD <b>/</b> DASHBOARD
+          </span>
 
           <div>
             <span className="month-tag">✿ {month}</span>
-            <span className="profile" aria-label="Profile">🌸</span>
+            <span className="profile" aria-label="Profile">
+              🌸
+            </span>
           </div>
         </header>
 
@@ -75,7 +83,9 @@ export default function App() {
 
             <h1>
               Let's make your money{" "}
-              <span><strong>Bloom!</strong></span>
+              <span>
+                <strong>Bloom!</strong>
+              </span>
             </h1>
 
             <p>Welcome back, little saver. Ready for a new quest?</p>
@@ -107,8 +117,8 @@ export default function App() {
 
         <div className="dashboard-grid">
           <TransactionForm
-             onAdd={addTransaction}
-              balance={balance}
+            onAdd={addTransaction}
+            balance={balance}
           />
 
           <SpendingChart transactions={transactions} />
@@ -116,13 +126,17 @@ export default function App() {
           <section
             id="transaction-history"
             className="panel recent-panel"
+            aria-labelledby="transaction-history-heading"
           >
             <header className="panel-title">
               <div>
                 <small className="pixel-label">LATEST ACTIVITY</small>
-                <h2>Coin history</h2>
+                <h2 id="transaction-history-heading">Coin history</h2>
               </div>
-              <span className="panel-star" aria-hidden="true">✳</span>
+
+              <span className="panel-star" aria-hidden="true">
+                ✳
+              </span>
             </header>
 
             <TransactionList
@@ -132,7 +146,10 @@ export default function App() {
           </section>
 
           <div id="savings">
-            <SavingsGoal goal={goal} onUpdate={updateGoal} />
+            <SavingsGoal
+              goal={goal}
+              onUpdate={updateGoal}
+            />
           </div>
         </div>
 
