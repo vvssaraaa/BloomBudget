@@ -106,7 +106,10 @@ export default function App() {
         />
 
         <div className="dashboard-grid">
-          <TransactionForm onAdd={addTransaction} />
+          <TransactionForm
+             onAdd={addTransaction}
+              balance={balance}
+          />
 
           <SpendingChart transactions={transactions} />
 

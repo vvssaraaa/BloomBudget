@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { CATEGORIES, today } from "../Utils/calculations";
 
-export default function TransactionForm({ onAdd }) {
+export default function TransactionForm({ onAdd, balance }) {
   const [type, setType] = useState("expense");
   const [error, setError] = useState("");
 
@@ -29,6 +29,10 @@ export default function TransactionForm({ onAdd }) {
       setError("Enter an amount greater than zero.");
       return;
     }
+    if (type === "expense" && amount > balance) {
+      setError("Not enough coins! Check your available balance.");
+      return;
+    }
 
     if (
       !CATEGORIES.includes(category) ||
@@ -40,7 +44,7 @@ export default function TransactionForm({ onAdd }) {
       );
       return;
     }
-
+   
     onAdd({
       description,
       amount: Math.round(amount * 100) / 100,
