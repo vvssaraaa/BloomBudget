@@ -1,11 +1,11 @@
-# BloomBudget
+# 🌸 BloomBudget 🌸 
 A gamified budgeting web app that helps students track spending, manage their money, and reach savings goals through a cute pixel-art interface.
 
-Features
+## Features
 
-★ Track income, expenses, and account balance.
+★ Income and expense tracking — Add and delete transactions by category.
 
-★ Add and delete transactions by category.
+★ Financial overview — View total income, expenses, and available balance
 
 ★ Visualize spending with an interactive chart.
 
@@ -13,7 +13,10 @@ Features
 
 ★ Save data locally in the browser.
 
-Tech Stack: 
+★ A pastel, pixel-inspired dashboard designed for a friendly budgeting experience.
+
+
+# Tech Stack: 
 
 ![html5](https://www.readmecodegen.com/api/social-icon?name=html5&size=96)
 ![css3](https://www.readmecodegen.com/api/social-icon?name=css3&size=96)
@@ -23,8 +26,8 @@ Tech Stack:
 
 - Browser localStorage
 
-Start adding transactions and tracking your savings goals.
+## Start adding transactions and tracking your savings goals 🌸 
 
-Current Limitations: 
+### Current Limitations: 
 
-For now this is a front-end prototype. Data is stored locally in the browser. It does not connect to bank accounts or synchronize data across devices.
+BloomBudget is a front-end project and does not connect to bank accounts or synchronize data across devices. Financial data is stored locally in the browser, so it is not automatically backed up or shared between browsers and devices.
