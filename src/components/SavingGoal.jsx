@@ -1,24 +1,8 @@
 
 import { useEffect, useState } from "react";
 import { money } from "../Utils/calculations";
+import Pet from "./pet";
 
-function PixelFlower() {
-  return (
-    <div
-      className="flower-sprite"
-      role="img"
-      aria-label="Your pixel flower companion"
-    >
-      <i className="petal top" />
-      <i className="petal left" />
-      <i className="petal right" />
-      <i className="petal bottom" />
-      <span className="flower-face">•ᴗ•</span>
-      <span className="stem" />
-      <span className="leaf" />
-    </div>
-  );
-}
 
 export default function SavingsGoal({ goal, onUpdate }) {
   const [editing, setEditing] = useState(false);
@@ -81,10 +65,7 @@ export default function SavingsGoal({ goal, onUpdate }) {
       </header>
 
       <div className="savings-content">
-        <div className="companion-card">
-          <span className="sparkle">✦</span>
-          <PixelFlower />
-          <small>YOUR BUDDY</small>
+          <Pet level={3} />
           <strong>Bloomie Lv. 3</strong>
         </div>
 
@@ -123,7 +104,6 @@ export default function SavingsGoal({ goal, onUpdate }) {
             {editing ? "Cancel editing" : "♡ Edit quest"}
           </button>
         </div>
-      </div>
 
       {editing && (
         <form className="goal-form" onSubmit={submit}>

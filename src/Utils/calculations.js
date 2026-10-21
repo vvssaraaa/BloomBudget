@@ -9,15 +9,7 @@ export const CATEGORIES = [
   "Other"
 ];
 
-export const COLORS = [
-  "#c9b2f0",
-  "#f4b8d2",
-  "#b8e3c8",
-  "#f6d989",
-  "#b8dbe8",
-  "#d9c2ef",
-  "#edc9b0"
-];
+export const COLORS = ["#b985f5", "#ed78a8", "#79d6a0", "#f2d779", "#7aa8f2", "#f29a6b"];
 
 export function today() {
   const date = new Date();

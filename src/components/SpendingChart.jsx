@@ -45,8 +45,8 @@ export default function SpendingChart({ transactions }) {
           {
             data: categories.map(item => item.total),
             backgroundColor: categories.map(item => item.color),
-            borderColor: "#49345f",
-            borderWidth: 2,
+            borderColor: "#0d1512",
+            borderWidth: 3,
             hoverOffset: 5
           }
         ]

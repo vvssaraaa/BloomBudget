@@ -94,17 +94,18 @@ export default function TransactionForm({ onAdd, balance }) {
             />
           </label>
 
-          <label>
-            Type
-            <select
-              name="type"
-              value={type}
-              onChange={event => setType(event.target.value)}
-            >
-              <option value="expense">Expense</option>
-              <option value="income">Income</option>
-            </select>
-          </label>
+         <div>
+          <span className="field-label">Type</span>
+          <div className="type-toggle" role="group" aria-label="Transaction type">
+            <button type="button"
+            className={`income ${type === "income" ? "active" : ""}`}
+            onClick={() => setType("income")}>Income</button>
+          <button
+            type="button"
+            className={`expense ${type === "expense" ? "active" : ""}`}
+            onClick={() => setType("expense")}>Expense</button>
+            </div>
+          </div>
         </div>
 
         <div className="form-row">

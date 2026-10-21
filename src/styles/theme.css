@@ -1,0 +1,819 @@
+/* =========================================================
+   theme.css - load LAST (after base, components, layout, responsive)
+   Turns the flat pixel look into the low poly dark forest look.
+   ========================================================= */
+
+:root {
+  --bg: #060b0a;
+  --paper: #0d1512;
+  --line: rgba(185, 133, 245, 0.28);
+  --radius: 12px;
+  --glow-purple: 0 0 0 1px rgba(185, 133, 245, 0.12), 0 8px 24px rgba(0, 0, 0, 0.45);
+  /* optional: add Space Grotesk in your <head> for the techy look in the mockup */
+  --pixel: "Space Grotesk", "DM Sans", sans-serif;
+}
+
+/* ---------- Low poly background ---------- */
+body {
+  background:
+    linear-gradient(115deg, rgba(51, 15, 84, 0.35) 0 22%, transparent 22% 100%),
+    linear-gradient(65deg, transparent 0 55%, rgba(10, 49, 5, 0.30) 55% 78%, transparent 78%),
+    linear-gradient(150deg, rgba(61, 12, 29, 0.18) 0 18%, transparent 18% 100%),
+    linear-gradient(25deg, transparent 0 40%, rgba(185, 133, 245, 0.05) 40% 55%, transparent 55%),
+    radial-gradient(ellipse at 80% 0%, #21132e 0%, transparent 45%),
+    radial-gradient(ellipse at 10% 70%, #0f2a1a 0%, transparent 50%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+/* ---------- Typography: readable small labels instead of tiny pixel text ---------- */
+.pixel-label,
+.side-label,
+.side-footer,
+.panel-star,
+.summary-top small,
+.level-bar,
+.companion-card small,
+.goal-percent,
+footer {
+  font-family: var(--pixel);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+footer { font-size: 10px; }
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: linear-gradient(180deg, #0c1411 0%, #0a100e 60%, #0c1a12 100%);
+  border-right: 1px solid var(--line);
+  gap: 6px;
+}
+
+.nav-item {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.nav-item:hover,
+.nav-item.selected {
+  background: rgba(121, 214, 160, 0.12);
+  border-color: rgba(121, 214, 160, 0.55);
+  box-shadow: none;
+}
+
+.brand-flower {
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.side-quest { margin-top: auto; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  border-bottom: 1px solid var(--line);
+  min-height: 64px;
+  margin-bottom: 20px;
+}
+
+/* ---------- Welcome banner with low poly mountains + moon ---------- */
+.welcome {
+  min-height: 170px;
+  margin-bottom: 20px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #1a0f2b 0%, #2a1340 55%, #12201a 100%);
+  box-shadow: var(--glow-purple);
+}
+
+.welcome > * { position: relative; z-index: 2; }
+
+.welcome::before { /* mountains + forest silhouette */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 70%;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, #3a2160 0 50%, #2b1848 50%) ;
+  clip-path: polygon(
+    0 100%, 0 70%, 12% 45%, 22% 62%, 38% 20%, 52% 55%, 63% 35%,
+    78% 60%, 90% 40%, 100% 62%, 100% 100%
+  );
+  opacity: 0.85;
+}
+
+.welcome::after { /* moon */
+  content: "";
+  position: absolute;
+  top: 22px;
+  right: 18%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  z-index: 1;
+  background: radial-gradient(circle at 35% 35%, #ffb0c8, var(--pink) 60%, var(--berry));
+  box-shadow: 0 0 40px rgba(237, 120, 168, 0.55);
+}
+
+.welcome h1 { font-size: clamp(22px, 2.4vw, 30px); }
+
+/* ---------- Level bar ---------- */
+.level-bar {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: none;
+  background: rgba(13, 21, 18, 0.8);
+}
+
+/* ---------- Grids (these were missing - cause of the stacked cards) ---------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Equal-height panels per row; content adapts to the space */
+.dashboard-grid { align-items: stretch; }
+
+.dashboard-grid .panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* spending: donut + legend centered in whatever room is left, tip pinned to bottom */
+.spending-panel .spending-layout {
+  flex: 1;
+  align-content: center;
+  margin-bottom: 16px;
+}
+
+.panel > .game-tip { margin-top: auto; }
+
+/* history: rows stay at the top, list scrolls once it gets long */
+.recent-panel .transaction-list {
+  flex: 1;
+  align-content: start;
+}
+/* row 1: spending (wide) + savings goal; row 2: add transaction + recent */
+.dashboard-grid > :nth-child(1) { grid-column: span 8; }
+.dashboard-grid > :nth-child(2) { grid-column: span 4; }
+.dashboard-grid > :nth-child(3) { grid-column: span 5; }
+.dashboard-grid > :nth-child(4) { grid-column: span 7; }
+
+.spending-layout {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.savings-content {
+  display: grid;
+  gap: 14px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ---------- Cards: rounded, thin glowing borders instead of hard pixel shadows ---------- */
+.panel,
+.summary {
+  border-radius: var(--radius);
+  border-width: 1px;
+  box-shadow: var(--glow-purple);
+  position: relative;
+}
+
+.panel {
+  background: linear-gradient(145deg, rgba(21, 27, 25, 0.92), rgba(17, 19, 25, 0.92));
+  border-color: var(--line);
+}
+
+/* faceted shine on the cards (low poly feel) */
+.panel::before,
+.summary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.04) 0 30%, transparent 30%),
+    linear-gradient(300deg, rgba(185, 133, 245, 0.06) 0 22%, transparent 22%);
+}
+
+.summary { padding: 20px; }
+
+.income  { border-color: rgba(121, 214, 160, 0.55); }
+.expense { border-color: rgba(237, 120, 168, 0.55); }
+.balance { border-color: rgba(185, 133, 245, 0.6); }
+
+.summary-amount {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.panel h2,
+.panel h3 { font-size: 16px; margin: 0 0 14px; }
+
+/* ---------- Forms & buttons ---------- */
+input,
+select,
+textarea {
+  border: 1px solid rgba(185, 133, 245, 0.4);
+  border-radius: 8px;
+  background: rgba(8, 13, 12, 0.85);
+}
+
+.pixel-button,
+.outline-button {
+  border: 1px solid rgba(185, 133, 245, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(99, 49, 139, 0.35);
+}
+
+.pixel-button { background: linear-gradient(110deg, #7a3fb0, #4a1f78); }
+
+.pixel-button:hover,
+.outline-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(185, 133, 245, 0.35);
+}
+
+/* ---------- Savings progress ---------- */
+.goal-track {
+  border: 1px solid rgba(185, 133, 245, 0.4);
+  border-radius: 999px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.goal-track span { border-radius: 999px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-grid > :nth-child(n) { grid-column: span 12; }
+}
+
+@media (max-width: 600px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .spending-layout { flex-direction: column; }
+  .welcome::after { right: 8%; }
+}
+/* ---------- Sidebar daily quest ---------- */
+.side-quest {
+  margin-top: auto;
+  padding: 16px 14px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(121, 214, 160, 0.18), transparent 70%),
+    rgba(185, 133, 245, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.side-quest .pixel-label,
+.side-quest .side-label {
+  margin-bottom: 8px;
+  color: var(--lilac);
+}
+
+.side-quest strong,
+.side-quest b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--purple);
+}
+
+.side-quest p {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.side-quest small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.side-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--mint);
+  border-top: 1px dashed var(--line);
+}
+/* ---------- 1) Panel order: spending | goal  /  add | history ---------- */
+/* Your DOM order: 1 add, 2 spending, 3 history, 4 goal */
+.dashboard-grid > :nth-child(2) { order: 1; grid-column: span 8; }  /* spending */
+.dashboard-grid > :nth-child(4) { order: 2; grid-column: span 4; }  /* treasure goal */
+.dashboard-grid > :nth-child(1) { order: 3; grid-column: span 5; }  /* add transaction */
+.dashboard-grid > :nth-child(3) { order: 4; grid-column: span 7; }  /* coin history */
+
+@media (max-width: 1100px) {
+  .dashboard-grid > :nth-child(n) { grid-column: span 12; }
+}
+
+/* ---------- 2) Donut chart: stop it from filling the whole card (GUESS) ---------- */
+.spending-layout { align-items: center; flex-wrap: wrap; }
+
+.spending-layout > :first-child {
+  flex: 0 0 190px;
+  width: 190px;
+  max-width: 190px;
+}
+
+.spending-layout > :first-child svg,
+.spending-layout > :first-child canvas,
+.spending-layout > :first-child .donut {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.spending-layout > :last-child { flex: 1 1 200px; min-width: 0; }
+
+/* ---------- 3) Treasure goal: pet card ---------- */
+.companion-card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 12px 10px;
+  margin-bottom: 14px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 85%, rgba(121, 214, 160, 0.18), transparent 65%),
+    rgba(10, 16, 14, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.companion-card small { color: var(--muted); }
+.companion-card strong { color: var(--purple); font-size: 14px; }
+
+/* hide the old text emoticon placeholders once the SVG pet is in */
+.pet-scene ~ .pet-face-old,
+.companion-card .pet-face-old { display: none; }
+
+.pet-scene {
+  position: relative;
+  width: 150px;
+  margin: 0 auto;
+}
+
+.pet {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(185, 133, 245, 0.35));
+  animation: pet-float 3.2s ease-in-out infinite;
+}
+
+.pet .pet-tail  { transform-origin: 96px 98px; animation: pet-wag 2.4s ease-in-out infinite; }
+.pet .pet-eyes  { transform-origin: 60px 60px; animation: pet-blink 5s infinite; }
+
+.pet-bubble {
+  position: absolute;
+  top: -4px;
+  right: -52px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--purple);
+  background: #1a1326;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pet-bubble::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  background: #1a1326;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+
+@keyframes pet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes pet-wag   { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(10deg); } }
+@keyframes pet-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+
+/* progress block under the pet */
+.goal-percent {
+  display: block;
+  margin-top: 6px;
+  color: var(--mint);
+  text-align: right;
+}
+
+.goal-track { height: 16px; }
+
+.panel-star { color: var(--lilac); opacity: 0.8; }
+
+/* ---------- 4) Coin history list (GUESS: li rows with a button inside) ---------- */
+.panel ul { list-style: none; margin: 0; padding: 0; }
+
+.panel li {
+  display: grid;
+  grid-template-columns: 32px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(185, 133, 245, 0.15);
+}
+
+.panel li:last-child { border-bottom: 0; }
+
+.panel li small,
+.panel li .muted { display: block; color: var(--muted); font-size: 11px; }
+
+.panel li button {
+  width: 28px;
+  min-height: 28px;
+  padding: 0;
+  color: var(--pink);
+  background: rgba(237, 120, 168, 0.1);
+  border: 1px solid rgba(237, 120, 168, 0.4);
+  border-radius: 8px;
+}
+
+.panel li button:hover { background: rgba(237, 120, 168, 0.25); }
+
+/* income green / expense pink if your amount has a class (GUESS) */
+.panel li .income,
+.panel li .amount.income { color: var(--mint); background: none; border: 0; box-shadow: none; }
+.panel li .expense,
+.panel li .amount.expense { color: var(--pink); background: none; border: 0; box-shadow: none; }
+
+/* ---------- Focus ring: calmer than the thick lilac outline ---------- */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 0;
+  border-color: var(--lilac);
+  box-shadow: 0 0 0 3px rgba(185, 133, 245, 0.25);
+}
+#savings {
+  display: flex;
+  min-width: 0;
+}
+
+#savings > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Welcome banner: SVG forest scene replaces the emoji art ---------- */
+.welcome::after { display: none; }          /* moon now lives in the SVG */
+
+.welcome .garden-art {
+  position: absolute;
+  right: 2%;
+  bottom: 0;
+  z-index: 2;
+  width: min(48%, 400px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.garden-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 700px) {
+  .welcome .garden-art { opacity: 0.45; width: 70%; }
+}
+
+/* ---------- Top bar ---------- */
+.topbar > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-tag {
+  padding: 4px 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--purple);
+  background: rgba(185, 133, 245, 0.08);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.profile {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: #150f1f;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+/* ---------- Panel header ---------- */
+.panel-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.panel-title h2 { margin: 0; }
+.panel-title .pixel-label { margin-bottom: 2px; }
+/* ---------- Spending donut ---------- */
+.donut {
+  position: relative;
+  flex: 0 0 190px;
+  width: 190px;
+  max-width: 100%;
+}
+
+.donut canvas { display: block; max-width: 100%; }
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 1px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center span { color: var(--pink); font-size: 16px; }
+
+.donut-center small {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.donut-center small:last-child {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--purple);
+}
+
+/* ---------- Legend ---------- */
+.legend {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend li {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+}
+
+.legend li i {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend li strong { color: var(--purple); }
+
+/* ---------- Coin history ---------- */
+.transaction-list {
+  display: grid;
+  gap: 4px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #4a2f66 transparent;
+}
+
+.transaction {
+  display: grid;
+  grid-template-columns: 38px 1fr auto 30px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-bottom: 1px solid rgba(185, 133, 245, 0.14);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.transaction:hover { background: rgba(185, 133, 245, 0.06); }
+.transaction:last-child { border-bottom: 0; }
+
+.transaction-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.transaction-icon.mint {
+  color: var(--mint);
+  background: rgba(121, 214, 160, 0.12);
+  border: 1px solid rgba(121, 214, 160, 0.4);
+}
+
+.transaction-icon.pink {
+  color: var(--pink);
+  background: rgba(237, 120, 168, 0.12);
+  border: 1px solid rgba(237, 120, 168, 0.4);
+}
+
+.transaction-details { min-width: 0; display: grid; }
+
+.transaction-details strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-details small { color: var(--muted); font-size: 11px; }
+
+.amount { color: var(--pink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.amount.earned { color: var(--mint); }
+
+.delete-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  line-height: 1;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.delete-button:hover {
+  color: var(--pink);
+  background: rgba(237, 120, 168, 0.12);
+  border-color: rgba(237, 120, 168, 0.4);
+}
+
+/* ---------- Form extras ---------- */
+.form-note { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: 12px; }
+
+.field-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #d2b8f3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* optional Income / Expense segmented toggle (see JSX in the reply) */
+.type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(185, 133, 245, 0.4);
+  border-radius: 8px;
+}
+
+.type-toggle button {
+  border: 0;
+  color: var(--muted);
+  background: rgba(8, 13, 12, 0.85);
+  font-weight: 600;
+}
+
+.type-toggle button.income.active { color: #06110c; background: linear-gradient(110deg, #4fae7c, var(--mint)); }
+.type-toggle button.expense.active { color: #1a0610; background: linear-gradient(110deg, #d4608f, var(--pink)); }
+
+/* ---------- Treasure goal ---------- */
+.savings-content { gap: 14px; margin-bottom: 14px; }
+
+.companion-card { overflow: visible; }
+.pet-bubble { 
+  top: 0;
+  right: -78px;
+  z-index: 3;
+}
+
+.goal-info {
+  padding: 14px;
+  background: rgba(8, 13, 12, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.goal-info h3 { margin: 2px 0 6px; font-size: 18px; }
+
+.goal-amount {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.goal-amount span {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.goal-info .outline-button { margin-top: 12px; }
+
+.goal-form {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- Tips ---------- */
+.game-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(121, 214, 160, 0.06);
+  border: 1px dashed rgba(121, 214, 160, 0.35);
+  border-radius: 10px;
+}
+
+.game-tip p { margin: 0; }
+.game-tip strong { color: var(--purple); }
+
+.game-tip.pink-tip {
+  background: rgba(237, 120, 168, 0.06);
+  border-color: rgba(237, 120, 168, 0.35);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.brand-gem {
+  flex: none;
+  width: 34px;
+  height: 40px;
+  filter: drop-shadow(0 0 8px rgba(185, 133, 245, 0.5));
+}
+
+.brand-text { display: grid; line-height: 1.15; }
+
+.brand-text span {
+  font-size: 19px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #e2c8ff, var(--lilac));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-text small {
+  margin-top: 3px;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

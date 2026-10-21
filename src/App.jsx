@@ -8,6 +8,7 @@ import TransactionList from "./components/TransactionList";
 import SpendingChart from "./components/SpendingChart";
 import SavingsGoal from "./components/SavingGoal";
 import LevelProgress from "./components/LevelProgress";
+import GardenArt from "./components/garden";
 
 import { calculateTotals } from "./Utils/calculations";
 import { loadData, saveData } from "./Utils/storage";
@@ -70,7 +71,7 @@ export default function App() {
           <div>
             <span className="month-tag">✿ {month}</span>
             <span className="profile" aria-label="Profile">
-              🌸
+              ✿
             </span>
           </div>
         </header>
@@ -91,13 +92,7 @@ export default function App() {
             <p>Welcome back, little saver. Ready for a new quest?</p>
           </div>
 
-          <div className="garden-art" aria-hidden="true">
-            <span className="cloud">☁</span>
-            <span className="sun">☼</span>
-            <span className="garden-flower">✿</span>
-            <span className="garden-flower second">✿</span>
-            <span className="grass">▰ ▰ ▰ ▰ ▰</span>
-          </div>
+         <GardenArt />
         </section>
 
         <LevelProgress
