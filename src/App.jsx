@@ -9,6 +9,7 @@ import SpendingChart from "./components/SpendingChart";
 import SavingsGoal from "./components/SavingGoal";
 import LevelProgress from "./components/LevelProgress";
 import GardenArt from "./components/garden";
+import "./styles/theme.css";
 
 import { calculateTotals } from "./Utils/calculations";
 import { loadData, saveData } from "./Utils/storage";
@@ -85,11 +86,9 @@ export default function App() {
             <h1>
               Let's make your money{" "}
               <span>
-                <strong>Bloom!</strong>
+                <strong>BLOOM!</strong>
               </span>
             </h1>
-
-            <p>Welcome back, little saver. Ready for a new quest?</p>
           </div>
 
          <GardenArt />

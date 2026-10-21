@@ -1,7 +1,32 @@
-/* =========================================================
-   theme.css - load LAST (after base, components, layout, responsive)
-   Turns the flat pixel look into the low poly dark forest look.
-   ========================================================= */
+@font-face {
+  font-family: "Your Complex BRK";
+  src: url("../assets/fonts/your-complex-brk.brk.woff2") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.welcome h1,
+.brand-text span,
+.panel h2,
+.panel h3,
+.summary-amount,
+.goal-amount,
+.donut-center small:last-child {
+  font-family: var(--display);
+  font-weight: 400;        /* only one weight exists, so don't ask for bold */
+  font-synthesis: none;    /* stops the browser faking a smeared bold */
+}
+
+/* it runs a little small, so bump the key sizes */
+.welcome h1 { font-size: clamp(28px, 3.2vw, 38px); }
+.summary-amount { font-size: 30px; }
+.panel h2 { font-size: 20px; }
+.brand-text span { font-size: 22px; }
+
+:root {
+  --display: "Your Complex BRK", "DM Sans", sans-serif;
+}
 
 :root {
   --bg: #060b0a;
@@ -9,11 +34,9 @@
   --line: rgba(185, 133, 245, 0.28);
   --radius: 12px;
   --glow-purple: 0 0 0 1px rgba(185, 133, 245, 0.12), 0 8px 24px rgba(0, 0, 0, 0.45);
-  /* optional: add Space Grotesk in your <head> for the techy look in the mockup */
   --pixel: "Space Grotesk", "DM Sans", sans-serif;
 }
 
-/* ---------- Low poly background ---------- */
 body {
   background:
     linear-gradient(115deg, rgba(51, 15, 84, 0.35) 0 22%, transparent 22% 100%),
@@ -26,7 +49,9 @@ body {
   background-attachment: fixed;
 }
 
-/* ---------- Typography: readable small labels instead of tiny pixel text ---------- */
+/* =========================================================
+   Typography
+   ========================================================= */
 .pixel-label,
 .side-label,
 .side-footer,
@@ -44,11 +69,54 @@ footer {
 
 footer { font-size: 10px; }
 
-/* ---------- Sidebar ---------- */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 0;
+  border-color: var(--lilac);
+  box-shadow: 0 0 0 3px rgba(185, 133, 245, 0.25);
+}
+
+/* =========================================================
+   Sidebar
+   ========================================================= */
 .sidebar {
   background: linear-gradient(180deg, #0c1411 0%, #0a100e 60%, #0c1a12 100%);
   border-right: 1px solid var(--line);
   gap: 6px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.brand-gem {
+  flex: none;
+  width: 34px;
+  height: 40px;
+  filter: drop-shadow(0 0 8px rgba(185, 133, 245, 0.5));
+}
+
+.brand-text { display: grid; line-height: 1.15; }
+
+.brand-text span {
+  font-size: 19px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #e2c8ff, var(--lilac));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-text small {
+  margin-top: 3px;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .nav-item {
@@ -65,65 +133,101 @@ footer { font-size: 10px; }
   box-shadow: none;
 }
 
-.brand-flower {
-  border-radius: 8px;
+.side-quest {
+  margin-top: auto;
+  padding: 16px 14px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(121, 214, 160, 0.18), transparent 70%),
+    rgba(185, 133, 245, 0.06);
   border: 1px solid var(--line);
-  box-shadow: none;
+  border-radius: 12px;
 }
 
-.side-quest { margin-top: auto; }
+.side-quest .pixel-label,
+.side-quest .side-label { margin-bottom: 8px; color: var(--lilac); }
 
-/* ---------- Top bar ---------- */
+.side-quest strong,
+.side-quest b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--purple);
+}
+
+.side-quest p { margin: 0 0 6px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.side-quest small { display: block; font-size: 11px; color: var(--muted); }
+
+.side-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--mint);
+  border-top: 1px dashed var(--line);
+}
+
+/* =========================================================
+   Top bar + welcome banner + level bar
+   ========================================================= */
 .topbar {
   border-bottom: 1px solid var(--line);
   min-height: 64px;
   margin-bottom: 20px;
 }
 
-/* ---------- Welcome banner with low poly mountains + moon ---------- */
-.welcome {
-  min-height: 170px;
-  margin-bottom: 20px;
-  padding: 24px 28px;
+.topbar > div { display: flex; align-items: center; gap: 10px; }
+
+.month-tag {
+  padding: 4px 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--purple);
+  background: rgba(185, 133, 245, 0.08);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, #1a0f2b 0%, #2a1340 55%, #12201a 100%);
-  box-shadow: var(--glow-purple);
+  border-radius: 999px;
 }
 
-.welcome > * { position: relative; z-index: 2; }
-
-.welcome::before { /* mountains + forest silhouette */
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 70%;
-  z-index: 1;
-  background:
-    linear-gradient(135deg, #3a2160 0 50%, #2b1848 50%) ;
-  clip-path: polygon(
-    0 100%, 0 70%, 12% 45%, 22% 62%, 38% 20%, 52% 55%, 63% 35%,
-    78% 60%, 90% 40%, 100% 62%, 100% 100%
-  );
-  opacity: 0.85;
-}
-
-.welcome::after { /* moon */
-  content: "";
-  position: absolute;
-  top: 22px;
-  right: 18%;
-  width: 46px;
-  height: 46px;
+.profile {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: #150f1f;
+  border: 1px solid var(--line);
   border-radius: 50%;
-  z-index: 1;
-  background: radial-gradient(circle at 35% 35%, #ffb0c8, var(--pink) 60%, var(--berry));
-  box-shadow: 0 0 40px rgba(237, 120, 168, 0.55);
 }
 
-.welcome h1 { font-size: clamp(22px, 2.4vw, 30px); }
+.welcome {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 200px;
+}
 
-/* ---------- Level bar ---------- */
+.welcome .garden-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 58%);
+  mask-image: linear-gradient(90deg, transparent 30%, #000 58%);
+}
+
+.welcome .garden-art svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .level-bar {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -131,7 +235,9 @@ footer { font-size: 10px; }
   background: rgba(13, 21, 18, 0.8);
 }
 
-/* ---------- Grids (these were missing - cause of the stacked cards) ---------- */
+/* =========================================================
+   Summary cards (gems + runes)
+   ========================================================= */
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -139,72 +245,89 @@ footer { font-size: 10px; }
   margin-bottom: 18px;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 18px;
-}
-
-/* Equal-height panels per row; content adapts to the space */
-.dashboard-grid { align-items: stretch; }
-
-.dashboard-grid .panel {
-  display: flex;
-  flex-direction: column;
-}
-
-/* spending: donut + legend centered in whatever room is left, tip pinned to bottom */
-.spending-panel .spending-layout {
-  flex: 1;
-  align-content: center;
-  margin-bottom: 16px;
-}
-
-.panel > .game-tip { margin-top: auto; }
-
-/* history: rows stay at the top, list scrolls once it gets long */
-.recent-panel .transaction-list {
-  flex: 1;
-  align-content: start;
-}
-/* row 1: spending (wide) + savings goal; row 2: add transaction + recent */
-.dashboard-grid > :nth-child(1) { grid-column: span 8; }
-.dashboard-grid > :nth-child(2) { grid-column: span 4; }
-.dashboard-grid > :nth-child(3) { grid-column: span 5; }
-.dashboard-grid > :nth-child(4) { grid-column: span 7; }
-
-.spending-layout {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.savings-content {
-  display: grid;
-  gap: 14px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-/* ---------- Cards: rounded, thin glowing borders instead of hard pixel shadows ---------- */
-.panel,
 .summary {
+  padding: 20px 96px 20px 20px;
   border-radius: var(--radius);
   border-width: 1px;
   box-shadow: var(--glow-purple);
   position: relative;
 }
 
-.panel {
-  background: linear-gradient(145deg, rgba(21, 27, 25, 0.92), rgba(17, 19, 25, 0.92));
-  border-color: var(--line);
+.summary-amount { font-size: 26px; font-weight: 700; line-height: 1.2; }
+
+.summary::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  width: 46px;
+  height: 62px;
+  transform: translateY(-50%);
+  clip-path: polygon(50% 0, 100% 32%, 50% 100%, 0 32%);
+  background: linear-gradient(90deg, var(--g1) 0 50%, var(--g2) 50% 100%);
+  pointer-events: none;
 }
 
-/* faceted shine on the cards (low poly feel) */
+.income  { --g1: #a6f2c8; --g2: #4fae7c; border-color: rgba(121, 214, 160, 0.55);
+  background: radial-gradient(circle at 92% 50%, rgba(121, 214, 160, 0.25), transparent 45%),
+              linear-gradient(135deg, #14271d, #101916); }
+
+.expense { --g1: #ffa6c8; --g2: #c94a7d; border-color: rgba(237, 120, 168, 0.55);
+  background: radial-gradient(circle at 92% 50%, rgba(237, 120, 168, 0.25), transparent 45%),
+              linear-gradient(135deg, #2b1420, #171219); }
+
+.balance { border-color: rgba(185, 133, 245, 0.6);
+  background: radial-gradient(circle at 92% 50%, rgba(185, 133, 245, 0.25), transparent 45%),
+              linear-gradient(135deg, #21172d, #121816); }
+
+.balance::after {
+  width: 52px;
+  height: 52px;
+  clip-path: none;
+  background: none;
+  border-radius: 50%;
+  border: 9px solid var(--lilac);
+  border-right-color: #4a2f66;
+}
+
+.runes { letter-spacing: 0.3em; font-size: 10px; color: var(--mint); }
+.expense .runes { color: var(--pink); }
+.balance .runes { color: var(--lilac); }
+
+/* =========================================================
+   Dashboard grid
+   DOM order: 1 add, 2 spending, 3 history, 4 goal
+   Visual:    spending | goal   /   add | history
+   ========================================================= */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.dashboard-grid > :nth-child(2) { order: 1; grid-column: span 6; }  /* spending */
+.dashboard-grid > :nth-child(4) { order: 2; grid-column: span 6; }  /* goal */
+.dashboard-grid > :nth-child(1) { order: 3; grid-column: span 5; }  /* add */
+.dashboard-grid > :nth-child(3) { order: 4; grid-column: span 7; }  /* history */
+
+#savings { display: flex; min-width: 0; }
+#savings > * { flex: 1; min-width: 0; }
+
+/* =========================================================
+   Panels
+   ========================================================= */
+.panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: var(--radius);
+  border-width: 1px;
+  border-color: var(--line);
+  background: linear-gradient(145deg, rgba(21, 27, 25, 0.92), rgba(17, 19, 25, 0.92));
+  box-shadow: var(--glow-purple);
+}
+
 .panel::before,
 .summary::before {
   content: "";
@@ -217,22 +340,33 @@ footer { font-size: 10px; }
     linear-gradient(300deg, rgba(185, 133, 245, 0.06) 0 22%, transparent 22%);
 }
 
-.summary { padding: 20px; }
-
-.income  { border-color: rgba(121, 214, 160, 0.55); }
-.expense { border-color: rgba(237, 120, 168, 0.55); }
-.balance { border-color: rgba(185, 133, 245, 0.6); }
-
-.summary-amount {
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
 .panel h2,
 .panel h3 { font-size: 16px; margin: 0 0 14px; }
 
-/* ---------- Forms & buttons ---------- */
+.panel-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.panel-title h2 { margin: 0; }
+.panel-title .pixel-label { margin-bottom: 2px; }
+.panel-star { color: var(--lilac); opacity: 0.8; }
+
+.panel > .game-tip { margin-top: auto; }
+.panel > * { flex-shrink: 0; }
+
+/* =========================================================
+   Forms & buttons
+   ========================================================= */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
 input,
 select,
 textarea {
@@ -256,313 +390,66 @@ textarea {
   box-shadow: 0 6px 18px rgba(185, 133, 245, 0.35);
 }
 
-/* ---------- Savings progress ---------- */
-.goal-track {
-  border: 1px solid rgba(185, 133, 245, 0.4);
-  border-radius: 999px;
-  overflow: hidden;
-  padding: 2px;
-}
+.form-note { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: 12px; }
 
-.goal-track span { border-radius: 999px; }
-
-/* ---------- Responsive ---------- */
-@media (max-width: 1100px) {
-  .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .dashboard-grid > :nth-child(n) { grid-column: span 12; }
-}
-
-@media (max-width: 600px) {
-  .summary-grid { grid-template-columns: 1fr; }
-  .spending-layout { flex-direction: column; }
-  .welcome::after { right: 8%; }
-}
-/* ---------- Sidebar daily quest ---------- */
-.side-quest {
-  margin-top: auto;
-  padding: 16px 14px;
-  text-align: center;
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(121, 214, 160, 0.18), transparent 70%),
-    rgba(185, 133, 245, 0.06);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-}
-
-.side-quest .pixel-label,
-.side-quest .side-label {
-  margin-bottom: 8px;
-  color: var(--lilac);
-}
-
-.side-quest strong,
-.side-quest b {
+.field-label {
   display: block;
-  margin-bottom: 4px;
-  font-size: 14px;
-  color: var(--purple);
-}
-
-.side-quest p {
-  margin: 0 0 6px;
+  margin-bottom: 5px;
+  color: #d2b8f3;
   font-size: 12px;
-  line-height: 1.5;
-  color: var(--muted);
+  font-weight: 700;
 }
 
-.side-quest small {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.side-footer {
-  margin-top: 14px;
-  padding-top: 12px;
-  text-align: center;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--mint);
-  border-top: 1px dashed var(--line);
-}
-/* ---------- 1) Panel order: spending | goal  /  add | history ---------- */
-/* Your DOM order: 1 add, 2 spending, 3 history, 4 goal */
-.dashboard-grid > :nth-child(2) { order: 1; grid-column: span 8; }  /* spending */
-.dashboard-grid > :nth-child(4) { order: 2; grid-column: span 4; }  /* treasure goal */
-.dashboard-grid > :nth-child(1) { order: 3; grid-column: span 5; }  /* add transaction */
-.dashboard-grid > :nth-child(3) { order: 4; grid-column: span 7; }  /* coin history */
-
-@media (max-width: 1100px) {
-  .dashboard-grid > :nth-child(n) { grid-column: span 12; }
-}
-
-/* ---------- 2) Donut chart: stop it from filling the whole card (GUESS) ---------- */
-.spending-layout { align-items: center; flex-wrap: wrap; }
-
-.spending-layout > :first-child {
-  flex: 0 0 190px;
-  width: 190px;
-  max-width: 190px;
-}
-
-.spending-layout > :first-child svg,
-.spending-layout > :first-child canvas,
-.spending-layout > :first-child .donut {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-}
-
-.spending-layout > :last-child { flex: 1 1 200px; min-width: 0; }
-
-/* ---------- 3) Treasure goal: pet card ---------- */
-.companion-card {
-  position: relative;
+.type-toggle {
   display: grid;
-  justify-items: center;
-  gap: 4px;
-  padding: 14px 12px 10px;
-  margin-bottom: 14px;
-  text-align: center;
-  background:
-    radial-gradient(ellipse at 50% 85%, rgba(121, 214, 160, 0.18), transparent 65%),
-    rgba(10, 16, 14, 0.7);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  grid-template-columns: 1fr 1fr;
+  min-height: 42px;
   overflow: hidden;
-}
-
-.companion-card small { color: var(--muted); }
-.companion-card strong { color: var(--purple); font-size: 14px; }
-
-/* hide the old text emoticon placeholders once the SVG pet is in */
-.pet-scene ~ .pet-face-old,
-.companion-card .pet-face-old { display: none; }
-
-.pet-scene {
-  position: relative;
-  width: 150px;
-  margin: 0 auto;
-}
-
-.pet {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 6px 10px rgba(185, 133, 245, 0.35));
-  animation: pet-float 3.2s ease-in-out infinite;
-}
-
-.pet .pet-tail  { transform-origin: 96px 98px; animation: pet-wag 2.4s ease-in-out infinite; }
-.pet .pet-eyes  { transform-origin: 60px 60px; animation: pet-blink 5s infinite; }
-
-.pet-bubble {
-  position: absolute;
-  top: -4px;
-  right: -52px;
-  padding: 4px 9px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--purple);
-  background: #1a1326;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  white-space: nowrap;
-}
-
-.pet-bubble::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  bottom: -5px;
-  width: 8px;
-  height: 8px;
-  background: #1a1326;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  transform: rotate(45deg);
-}
-
-@keyframes pet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-@keyframes pet-wag   { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(10deg); } }
-@keyframes pet-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
-
-/* progress block under the pet */
-.goal-percent {
-  display: block;
-  margin-top: 6px;
-  color: var(--mint);
-  text-align: right;
-}
-
-.goal-track { height: 16px; }
-
-.panel-star { color: var(--lilac); opacity: 0.8; }
-
-/* ---------- 4) Coin history list (GUESS: li rows with a button inside) ---------- */
-.panel ul { list-style: none; margin: 0; padding: 0; }
-
-.panel li {
-  display: grid;
-  grid-template-columns: 32px 1fr auto auto;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(185, 133, 245, 0.15);
-}
-
-.panel li:last-child { border-bottom: 0; }
-
-.panel li small,
-.panel li .muted { display: block; color: var(--muted); font-size: 11px; }
-
-.panel li button {
-  width: 28px;
-  min-height: 28px;
-  padding: 0;
-  color: var(--pink);
-  background: rgba(237, 120, 168, 0.1);
-  border: 1px solid rgba(237, 120, 168, 0.4);
+  border: 1px solid rgba(185, 133, 245, 0.4);
   border-radius: 8px;
 }
 
-.panel li button:hover { background: rgba(237, 120, 168, 0.25); }
-
-/* income green / expense pink if your amount has a class (GUESS) */
-.panel li .income,
-.panel li .amount.income { color: var(--mint); background: none; border: 0; box-shadow: none; }
-.panel li .expense,
-.panel li .amount.expense { color: var(--pink); background: none; border: 0; box-shadow: none; }
-
-/* ---------- Focus ring: calmer than the thick lilac outline ---------- */
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 0;
-  border-color: var(--lilac);
-  box-shadow: 0 0 0 3px rgba(185, 133, 245, 0.25);
+.type-toggle button {
+  border: 0;
+  color: var(--muted);
+  background: rgba(8, 13, 12, 0.85);
+  font-weight: 600;
 }
-#savings {
+
+.type-toggle button.income.active  { color: #06110c; background: linear-gradient(110deg, #4fae7c, var(--mint)); }
+.type-toggle button.expense.active { color: #1a0610; background: linear-gradient(110deg, #d4608f, var(--pink)); }
+
+/* =========================================================
+   Spending panel (donut + legend)
+   ========================================================= */
+.spending-layout {
   display: flex;
-  min-width: 0;
-}
-
-#savings > * {
   flex: 1;
-  min-width: 0;
-}
-
-/* ---------- Welcome banner: SVG forest scene replaces the emoji art ---------- */
-.welcome::after { display: none; }          /* moon now lives in the SVG */
-
-.welcome .garden-art {
-  position: absolute;
-  right: 2%;
-  bottom: 0;
-  z-index: 2;
-  width: min(48%, 400px);
-  height: 100%;
-  pointer-events: none;
-}
-
-.garden-art svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-@media (max-width: 700px) {
-  .welcome .garden-art { opacity: 0.45; width: 70%; }
-}
-
-/* ---------- Top bar ---------- */
-.topbar > div {
-  display: flex;
   align-items: center;
-  gap: 10px;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-bottom: 16px;
 }
 
-.month-tag {
-  padding: 4px 14px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--purple);
-  background: rgba(185, 133, 245, 0.08);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-}
-
-.profile {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  background: #150f1f;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-}
-
-/* ---------- Panel header ---------- */
-.panel-title {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.panel-title h2 { margin: 0; }
-.panel-title .pixel-label { margin-bottom: 2px; }
-/* ---------- Spending donut ---------- */
 .donut {
   position: relative;
-  flex: 0 0 190px;
-  width: 190px;
+  flex: 0 0 220px;
+  width: 220px;
   max-width: 100%;
 }
 
 .donut canvas { display: block; max-width: 100%; }
+
+.donut.empty { aspect-ratio: 1; }
+.donut.empty canvas { display: none; }
+.donut.empty::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 34px solid rgba(185, 133, 245, 0.12);
+}
 
 .donut-center {
   position: absolute;
@@ -575,24 +462,14 @@ textarea:focus {
 }
 
 .donut-center span { color: var(--pink); font-size: 16px; }
+.donut-center small { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
+.donut-center small:last-child { font-size: 13px; font-weight: 700; letter-spacing: 0; color: var(--purple); }
 
-.donut-center small {
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-}
+.spending-layout > :last-child { flex: 1 1 200px; min-width: 0; }
 
-.donut-center small:last-child {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0;
-  color: var(--purple);
-}
-
-/* ---------- Legend ---------- */
 .legend {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -600,23 +477,21 @@ textarea:focus {
 
 .legend li {
   display: grid;
-  grid-template-columns: 12px 1fr auto;
+  grid-template-columns: 12px 1fr auto auto;
   align-items: center;
   gap: 10px;
-  padding: 0;
-  border: 0;
+  font-size: 14px;
 }
 
-.legend li i {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
+.legend li i { display: block; width: 12px; height: 12px; border-radius: 50%; }
 .legend li strong { color: var(--purple); }
+.legend-amount { color: var(--muted); font-size: 13px; }
 
-/* ---------- Coin history ---------- */
+/* =========================================================
+   Coin history
+   ========================================================= */
+.recent-panel .transaction-list { flex: 1; align-content: start; }
+
 .transaction-list {
   display: grid;
   gap: 4px;
@@ -650,26 +525,11 @@ textarea:focus {
   font-size: 16px;
 }
 
-.transaction-icon.mint {
-  color: var(--mint);
-  background: rgba(121, 214, 160, 0.12);
-  border: 1px solid rgba(121, 214, 160, 0.4);
-}
-
-.transaction-icon.pink {
-  color: var(--pink);
-  background: rgba(237, 120, 168, 0.12);
-  border: 1px solid rgba(237, 120, 168, 0.4);
-}
+.transaction-icon.mint { color: var(--mint); background: rgba(121, 214, 160, 0.12); border: 1px solid rgba(121, 214, 160, 0.4); }
+.transaction-icon.pink { color: var(--pink); background: rgba(237, 120, 168, 0.12); border: 1px solid rgba(237, 120, 168, 0.4); }
 
 .transaction-details { min-width: 0; display: grid; }
-
-.transaction-details strong {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
+.transaction-details strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .transaction-details small { color: var(--muted); font-size: 11px; }
 
 .amount { color: var(--pink); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -693,46 +553,84 @@ textarea:focus {
   border-color: rgba(237, 120, 168, 0.4);
 }
 
-/* ---------- Form extras ---------- */
-.form-note { margin: 12px 0 0; text-align: center; color: var(--muted); font-size: 12px; }
-
-.field-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #d2b8f3;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* optional Income / Expense segmented toggle (see JSX in the reply) */
-.type-toggle {
+/* =========================================================
+   Treasure goal + pet
+   ========================================================= */
+.savings-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 42px;
-  overflow: hidden;
-  border: 1px solid rgba(185, 133, 245, 0.4);
-  border-radius: 8px;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.type-toggle button {
-  border: 0;
-  color: var(--muted);
-  background: rgba(8, 13, 12, 0.85);
-  font-weight: 600;
+.savings-content > .goal-info { grid-column: auto; width: 100%; }
+
+.companion-card {
+  grid-column: auto;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  padding: 18px 18px 14px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 65%, rgba(121, 214, 160, 0.22), transparent 65%),
+    linear-gradient(160deg, #1f1533 0%, #0f1a15 100%);
+  border: 1px solid rgba(185, 133, 245, 0.45);
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(185, 133, 245, 0.12);
+  overflow: visible;
 }
 
-.type-toggle button.income.active { color: #06110c; background: linear-gradient(110deg, #4fae7c, var(--mint)); }
-.type-toggle button.expense.active { color: #1a0610; background: linear-gradient(110deg, #d4608f, var(--pink)); }
+.pet-scene { position: relative; width: 150px; margin: 36px auto 0; }
 
-/* ---------- Treasure goal ---------- */
-.savings-content { gap: 14px; margin-bottom: 14px; }
+.pet {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(185, 133, 245, 0.35));
+  animation: pet-float 3.2s ease-in-out infinite;
+}
 
-.companion-card { overflow: visible; }
-.pet-bubble { 
-  top: 0;
-  right: -78px;
+.pet .pet-tail { transform-origin: 96px 98px; animation: pet-wag 2.4s ease-in-out infinite; }
+.pet .pet-eyes { transform-origin: 60px 60px; animation: pet-blink 5s infinite; }
+
+.pet-bubble {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--purple);
+  background: #1a1326;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  white-space: nowrap;
 }
+
+.pet-bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 4px);
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  background: #1a1326;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+
+@keyframes pet-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes pet-wag   { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(10deg); } }
+@keyframes pet-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
 
 .goal-info {
   padding: 14px;
@@ -742,29 +640,27 @@ textarea:focus {
 }
 
 .goal-info h3 { margin: 2px 0 6px; font-size: 18px; }
-
-.goal-amount {
-  margin: 0 0 10px;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.goal-amount span {
-  margin-left: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-}
-
+.goal-amount { margin: 0 0 10px; font-size: 20px; font-weight: 700; }
+.goal-amount span { margin-left: 6px; font-size: 13px; font-weight: 500; color: var(--muted); }
 .goal-info .outline-button { margin-top: 12px; }
 
-.goal-form {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--line);
+.goal-track {
+  height: 16px;
+  padding: 2px;
+  border: 1px solid rgba(185, 133, 245, 0.4);
+  border-radius: 999px;
+  overflow: hidden;
 }
 
-/* ---------- Tips ---------- */
+.goal-track span { border-radius: 999px; }
+
+.goal-percent { display: block; margin-top: 6px; color: var(--mint); text-align: right; }
+
+.goal-form { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+
+/* =========================================================
+   Tips
+   ========================================================= */
 .game-tip {
   display: flex;
   align-items: flex-start;
@@ -785,35 +681,24 @@ textarea:focus {
   background: rgba(237, 120, 168, 0.06);
   border-color: rgba(237, 120, 168, 0.35);
 }
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 26px;
+
+/* =========================================================
+   Responsive (keep at the bottom)
+   ========================================================= */
+@media (max-width: 1100px) {
+  .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-grid > :nth-child(n) { grid-column: span 12; }
 }
 
-.brand-gem {
-  flex: none;
-  width: 34px;
-  height: 40px;
-  filter: drop-shadow(0 0 8px rgba(185, 133, 245, 0.5));
+@media (max-width: 700px) {
+  .savings-content { grid-template-columns: 1fr; }
+  .welcome .garden-art { opacity: 0.45; width: 70%; }
 }
 
-.brand-text { display: grid; line-height: 1.15; }
-
-.brand-text span {
-  font-size: 19px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #e2c8ff, var(--lilac));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+@media (max-width: 600px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .spending-layout { flex-direction: column; }
 }
-
-.brand-text small {
-  margin-top: 3px;
-  font-size: 8px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
+body {
+  font-family: "Your Complex BRK", monospace !important;
 }

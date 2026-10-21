@@ -66,7 +66,6 @@ export default function SavingsGoal({ goal, onUpdate }) {
 
       <div className="savings-content">
           <Pet level={3} />
-          <strong>Bloomie Lv. 3</strong>
         </div>
 
         <div className="goal-info">
