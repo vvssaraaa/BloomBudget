@@ -17,6 +17,7 @@ export default function LevelProgress({ transactions, balanceLabel }) {
       <div
         className="xp-track"
         role="progressbar"
+        aria-valuetext={`${progress.currentXP} of ${progress.xpNeeded} XP`}
         aria-label="Progress to next level"
         aria-valuenow={progress.currentXP}
         aria-valuemin="0"
@@ -30,7 +31,9 @@ export default function LevelProgress({ transactions, balanceLabel }) {
       </span>
 
       <span className="coin-count">
-        🟡 {balanceLabel}
+      <span aria-hidden="true">🟡</span>
+      <span className="sr-only">Balance: </span>
+      {balanceLabel}
       </span>
     </section>
   );

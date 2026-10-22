@@ -9,7 +9,6 @@ import SpendingChart from "./components/SpendingChart";
 import SavingsGoal from "./components/SavingGoal";
 import LevelProgress from "./components/LevelProgress";
 import GardenArt from "./components/garden";
-import "./styles/theme.css";
 
 import { calculateTotals } from "./Utils/calculations";
 import { loadData, saveData } from "./Utils/storage";

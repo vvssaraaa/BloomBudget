@@ -93,6 +93,7 @@ export default function TransactionForm({ onAdd, balance }) {
               required
             />
           </label>
+          </div>
 
          <div>
           <span className="field-label">Type</span>
@@ -106,7 +107,6 @@ export default function TransactionForm({ onAdd, balance }) {
             onClick={() => setType("expense")}>Expense</button>
             </div>
           </div>
-        </div>
 
         <div className="form-row">
           <label>

@@ -109,6 +109,7 @@ export default function SpendingChart({ transactions }) {
               <li key={item.category}>
                 <i style={{ background: item.color }} />
                 <span>{item.category}</span>
+                <span className="legend-amount">{money(item.total)}</span>
                 <strong>
                   {total
                     ? Math.round((item.total / total) * 100)

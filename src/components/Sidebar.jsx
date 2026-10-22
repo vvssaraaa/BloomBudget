@@ -1,6 +1,8 @@
+import { useState } from "react";
 export default function Sidebar() {
+  const [active, setActive] = useState("Dashboard");
   const links = [
-    ["⌂", "Dashboard", "#home"],
+    ["⌂", "Dashboard", "#main-content"],
     ["▤", "Transactions", "#transactions"],
     ["◉", "Spending", "#spending"],
     ["♡", "Savings quest", "#savings"]
@@ -27,14 +29,15 @@ export default function Sidebar() {
 
       <nav aria-label="Main navigation">
         {links.map(([icon, label, href], index) => (
-          <a
-            key={label}
-            className={`nav-item ${index === 0 ? "selected" : ""}`}
-            href={href}
-          >
-            <span>{icon}</span>
-            {label}
-          </a>
+        <a
+         key={label}
+         className={`nav-item ${active === label ? "selected" : ""}`}
+          href={href}
+          aria-current={active === label ? "location" : undefined}
+           onClick={() => setActive(label)}>
+           <span aria-hidden="true">{icon}</span>
+           {label}
+        </a>
         ))}
       </nav>
 
@@ -60,14 +63,14 @@ export default function Sidebar() {
         <strong>Be kind to your coins!</strong>
         <p>Little steps grow big things.</p>
 
-        <div className="xp-track">
+        <div className="xp-track" aria-hidden="true">
           <span />
         </div>
 
         <small>One transaction at a time</small>
       </div>
 
-      <p className="side-footer">♡ SAVE · GROW · REPEAT ♡</p>
+      <p className="side-footer"><span aria-hidden="true">♡</span> SAVE · GROW · REPEAT <span aria-hidden="true">♡</span></p>.
     </aside>
   );
 }
