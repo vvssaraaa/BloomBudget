@@ -1,5 +1,5 @@
 # 🌸 BloomBudget 🌸 
-A gamified budgeting web app that helps students track spending, manage their money, and reach savings goals through a cute pixel-art interface.
+A gamified budgeting web app that helps students track spending, manage their money, and reach savings goals through a cute forrest themed interface.
 
 ## Features
 
