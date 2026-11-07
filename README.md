@@ -31,3 +31,15 @@ A gamified budgeting web app that helps students track spending, manage their mo
 ### Current Limitations: 
 
 BloomBudget is a front-end project and does not connect to bank accounts or synchronize data across devices. Financial data is stored locally in the browser, so it is not automatically backed up or shared between browsers and devices.
+
+# Demo
+https://github.com/user-attachments/assets/5af48d5d-f403-41c6-9dd7-2af4fc9c8405
+
+
+
+
+
+
+
+
+
